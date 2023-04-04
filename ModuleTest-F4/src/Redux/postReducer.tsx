@@ -1,38 +1,22 @@
-import {
-    FETCH_USERS_REQUEST,
-    FETCH_USERS_SUCCESS,
-    FETCH_USERS_FAILURE
-} from './postsType.js'
+import { FETCH_POST_REQUEST, FETCH_POST_SUCCESS, FETCH_POST_FAILURE } from './postsType.js'
 
 export const initislState={
-    loading: false,
-    posts: [],
+    pending: false,
+    postsData: [],
     error: '',
 }
 
-const reducer = (state=initislState, action:any) => {
+const postReducer = (state=initislState, action:any) => {
     switch(action.type){
-        case FETCH_USERS_REQUEST:
-            return{
-                ...state,
-                loading: true,
-            }
-        case FETCH_USERS_SUCCESS:
-            return{
-                ...state,
-                loading:false,
-                posts: action.payload,
-                error: '',
-            }
-        case FETCH_USERS_FAILURE:
-            return{
-                loading: false,
-                posts: [],
-                error: action.payload
-            }
+        case FETCH_POST_REQUEST:
+            return{...state, pending: true,}
+        case FETCH_POST_SUCCESS:
+            return{ ...state, pending:false, postsData: action.value, error: ''}
+        case FETCH_POST_FAILURE:
+            return{ pending: false, postsData: [], error: action.value}
         default:
             return state
     }
 }
 
-export default reducer
+export default postReducer

@@ -1,38 +1,31 @@
-import {
-    FETCH_USERS_REQUEST,
-    FETCH_USERS_SUCCESS,
-    FETCH_USERS_FAILURE
-} from './postsType.js'
+import { FETCH_POST_REQUEST, FETCH_POST_SUCCESS, FETCH_POST_FAILURE } from './postsType.js'
 
-
-export const FetchUsers = () =>{
+export const FetchPosts = () =>{
     return (dispatch:any) => {
-        dispatch(fetchUserRequests());
+        dispatch(postRequest());
         fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response =>  response.json())
-      .then(data =>  dispatch(fetchUsersSuccess(data)))
+      .then(res =>  res.json())
+      .then(data =>  dispatch(postSuccess(data)))
       .catch((error) => {
-          dispatch(fetchUsersFailure(error))
+          dispatch(postFailure(error))
       })
     }
 }
 
-
-export const fetchUserRequests = () => {
+export const postRequest = () => {
     return {
-        type: FETCH_USERS_REQUEST
+        type: FETCH_POST_REQUEST
     }
 }
-
-export const fetchUsersSuccess = (data:any) => {
+export const postSuccess = (data:any) => {
     return{
-        type: FETCH_USERS_SUCCESS,
-        payload: data,
+        type: FETCH_POST_SUCCESS,
+        value: data,
     }
 }
-export const fetchUsersFailure = (error:any) => {
+export const postFailure = (error:any) => {
     return{
-        type: FETCH_USERS_FAILURE,
-        payload: error,
+        type: FETCH_POST_FAILURE,
+        value: error,
     }
 }
