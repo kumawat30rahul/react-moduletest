@@ -28,7 +28,7 @@ function Home({ Data, fetchingUsers }: any) {
             >
               <div className="post">
                 <img
-                  src={`https://picsum.photos/200?random=${post.id}`}
+                  src={`https://picsum.photos/200?${post.id}`}
                   alt=""
                   className="post_image"
                 />
